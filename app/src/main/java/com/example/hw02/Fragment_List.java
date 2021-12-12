@@ -14,7 +14,7 @@ public class Fragment_List extends Fragment {
     private AppCompatActivity activity;
     private CallBack_List callBack_list;
     private MyDB myDB;
-
+private int tempCounter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,8 +29,14 @@ public class Fragment_List extends Fragment {
 
     private void initViews() {
         ArrayList<Player> players = myDB.getPlayers();
+        if(players.size()<10){
+            tempCounter = players.size();
+        }
+        else{
+            tempCounter =10;
+        }
 
-        for (int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < tempCounter; i++) {
             Player tempPlayer = players.get(i);
             listTable[i][0].setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,8 +96,15 @@ public class Fragment_List extends Fragment {
 
 
     public  void addNameAndScore(){
+
         ArrayList<Player> palPlayers = myDB.getPlayers();
-        for (int i = 0; i < palPlayers.size(); i++) {
+        if(palPlayers.size()<10){
+            tempCounter = palPlayers.size();
+        }
+        else{
+            tempCounter =10;
+        }
+        for (int i = 0; i < tempCounter; i++) {
 
             listTable[i][0].setText(palPlayers.get(i).getName());
             listTable[i][1].setText(String.valueOf(palPlayers.get(i).getScore()));
